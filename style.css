@@ -1,0 +1,509 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+
+
+body { /* NB: pas de responsive encore */
+  width: 720px; 
+  margin: 1em auto; 
+  font-family: 'Open Sans', sans-serif;   
+  text-rendering: optimizeLegibility;
+}
+
+header { text-align:center; }
+header img { width: 150px; height: auto; }
+
+
+/* Générique et utilitaire */
+
+.fl_right { float: right; }
+.fl_left { float: left; }
+.fl_reset { float: none; clear: both; }
+.form_left { width: 50%; float: left; }
+.form_right { width: 50%; float: right; }
+
+
+/* Mise en forme du form */
+
+fieldset { margin: 2em 0; width: 700px; }
+label { float: left; width: 17em; padding: 1em 0.5em 0; text-align: right; font-weight: bold; font-size: 0.9em;}
+label a { font-weight: normal; text-decoration: none; font-size: 1.3em;  } /* correction icone info */
+input, select, textarea { margin: 0.5em 0.30em; padding: 0.5em; width: 30em;} /* par def */
+
+#outputform { background-color: #f7f7f7; }
+#outputform label { width: 13em; font-size: 0.8em;}
+#outputform input { width: 10em; }
+
+/* champs raccourcis pour en avoir 2 sur une ligne */
+label.endline { padding-left: 20em; }
+input.mini_input { width: 8.95em; }
+input.small_input { width: 12.1em; }
+
+/* alignements de longueurs de champs et autres ajustements */
+select { width: 31.24em; } 
+textarea { width: 30.2em; }
+input[type="date" i] { width: 29.98em; }
+label.withicon { padding-top: 0.6em; }
+
+#total_price { float: right; padding: 0.5em 0.5em 0 0; }
+#total_price label { width: 5em; font-size: 1.1em; padding-top: 10px; color: #ca1d1d;}
+#total_price input { border-color: #ca1d1d; }
+
+/* Listage des options supplémentaires sélectionnées (js) */
+
+ul#selected_options {
+  list-style-type: none;
+  margin: 0 0 0.3em 15em;
+}
+
+#selected_options li {
+  cursor: pointer;
+  text-align: right;
+  padding: 0 2em 0.5em 0;
+  font-size: 0.8em;
+  font-weight: bold;
+}
+
+#selected_options li:after { /* icone delete */
+  content: "\2718";
+  padding-left: 10px;
+  color: #ca1d1d;
+}
+
+
+/* Boutons save / print (icone + texte) */
+
+.buttons {
+  display: inline-block;
+  
+  background: #eeeeee; /* Old browsers */
+  background: -moz-linear-gradient(top, #eeeeee 0%, #eeeeee 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#eeeeee), color-stop(100%,#eeeeee)); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top, #eeeeee 0%,#eeeeee 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top, #eeeeee 0%,#eeeeee 100%); /* Opera11.10+ */
+  background: -ms-linear-gradient(top, #eeeeee 0%,#eeeeee 100%); /* IE10+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#eeeeee', endColorstr='#eeeeee',GradientType=0 ); /* IE6-9 */
+  background: linear-gradient(top, #eeeeee 0%,#eeeeee 100%); /* W3C */
+  border: 1px solid #a1a1a1;
+  padding: 0 2em;
+  margin: 1em 1.1em .5em 0;
+  font: bold 1em/2em Arial, Helvetica;
+  text-decoration: none;
+  color: #333;
+  border-radius: .2em;
+  min-width: 110px;
+  text-align: center;
+}
+
+.buttons:before {
+  float: left;
+  width: 1em;
+  text-align: center;
+  font-size: 1.7em;
+  margin: 0 0.5em 0 -1em;
+  padding: 0 .2em;
+  pointer-events: none;
+}
+
+
+/* Icone des boutons en unicode */
+.save:before   { content: "\2714";}
+.print:before   { content: "\2399";}
+.submit:before   { content: "\27A4";}
+.cancel:before   { content: "\232B";}
+
+/* Coloration des boutons au survol */
+
+.save:hover {
+  background: #d2d3ff; /* Old browsers */
+  background: -moz-linear-gradient(top, #d2d3ff 0%, #eeeeee 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#d2d3ff), color-stop(100%,#eeeeee)); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top, #d2d3ff 0%,#eeeeee 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top, #d2d3ff 0%,#eeeeee 100%); /* Opera11.10+ */
+  background: -ms-linear-gradient(top, #d2d3ff 0%,#eeeeee 100%); /* IE10+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d2d3ff', endColorstr='#eeeeee',GradientType=0 ); /* IE6-9 */
+  background: linear-gradient(top, #d2d3ff 0%,#eeeeee 100%); /* W3C */
+}
+
+.print:hover {
+  background: #f6ffd2; /* Old browsers */
+  background: -moz-linear-gradient(top, #f6ffd2 0%, #eeeeee 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f6ffd2), color-stop(100%,#eeeeee)); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top, #f6ffd2 0%,#eeeeee 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top, #f6ffd2 0%,#eeeeee 100%); /* Opera11.10+ */
+  background: -ms-linear-gradient(top, #f6ffd2 0%,#eeeeee 100%); /* IE10+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f6ffd2', endColorstr='#eeeeee',GradientType=0 ); /* IE6-9 */
+  background: linear-gradient(top, #f6ffd2 0%,#eeeeee 100%); /* W3C */
+}
+
+.submit:hover {
+  background: #d2ffe0; /* Old browsers */
+  background: -moz-linear-gradient(top, #d2ffe0 0%, #eeeeee 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#d2ffe0), color-stop(100%,#eeeeee)); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top, #d2ffe0 0%,#eeeeee 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top, #d2ffe0 0%,#eeeeee 100%); /* Opera11.10+ */
+  background: -ms-linear-gradient(top, #d2ffe0 0%,#eeeeee 100%); /* IE10+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d2ffe0', endColorstr='#eeeeee',GradientType=0 ); /* IE6-9 */
+  background: linear-gradient(top, #d2ffe0 0%,#eeeeee 100%); /* W3C */
+}
+
+.cancel:hover {
+  background: #ffd2d2; /* Old browsers */
+  background: -moz-linear-gradient(top, #ffd2d2 0%, #eeeeee 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffd2d2), color-stop(100%,#eeeeee)); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top, #ffd2d2 0%,#eeeeee 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top, #ffd2d2 0%,#eeeeee 100%); /* Opera11.10+ */
+  background: -ms-linear-gradient(top, #ffd2d2 0%,#eeeeee 100%); /* IE10+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffd2d2', endColorstr='#eeeeee',GradientType=0 ); /* IE6-9 */
+  background: linear-gradient(top, #ffd2d2 0%,#eeeeee 100%); /* W3C */
+}
+
+
+
+#footer_helper { /* zone de contenu sous les formulaires */
+  margin-top: 7em;
+}
+
+/* Mise en forme du tableau */
+
+div.table-title {
+  display: block;
+  margin: auto;
+  max-width: 600px;
+  padding:3px;
+  width: 100%;
+}
+
+.table-title h3 {
+   color: #222222;
+   font-size: 25px;
+   font-weight: 400;
+   font-style:normal;
+   text-shadow: -1px -1px 1px rgba(0, 0, 0, 0.1);
+   text-transform:uppercase;
+}
+
+.table-fill {
+  background: white;
+  border-radius:3px;
+  border-collapse: collapse;
+  margin: auto;
+  max-width: 600px;
+  padding:5px;
+  width: 100%;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+  animation: float 5s infinite;
+}
+ 
+th {
+  color:#D5DDE5;;
+  background:#1b1e24;
+  border-bottom:4px solid #9ea7af;
+  border-right: 1px solid #343a45;
+  font-size:15px;
+  font-weight: 100;
+  padding:14px;
+  text-align:left;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+  vertical-align:middle;
+}
+
+th:first-child {
+  border-top-left-radius:3px;
+}
+ 
+th:last-child {
+  border-top-right-radius:3px;
+  border-right:none;
+}
+  
+tr {
+  border-top: 1px solid #C1C3D1;
+  border-bottom-: 1px solid #C1C3D1;
+  color:#666B85;
+  font-size:14px;
+  font-weight:normal;
+  text-shadow: 0 1px 1px rgba(256, 256, 256, 0.1);
+}
+ 
+tr:hover td {
+  background:#4E5066;
+  color:#FFFFFF;
+  border-top: 1px solid #22262e;
+  border-bottom: 1px solid #22262e;
+}
+ 
+tr:first-child {
+  border-top:none;
+}
+
+tr:last-child {
+  border-bottom:none;
+}
+ 
+tr:nth-child(odd) td {
+  background:#EBEBEB;
+}
+ 
+tr:nth-child(odd):hover td {
+  background:#4E5066;
+}
+
+tr:last-child td:first-child {
+  border-bottom-left-radius:3px;
+}
+ 
+tr:last-child td:last-child {
+  border-bottom-right-radius:3px;
+}
+ 
+td {
+  background:#FFFFFF;
+  padding:20px;
+  text-align:left;
+  vertical-align:middle;
+  font-weight:300;
+  font-size:14px;
+  text-shadow: -1px -1px 1px rgba(0, 0, 0, 0.1);
+  border-right: 1px solid #C1C3D1;
+}
+
+td:last-child {
+  border-right: 0px;
+}
+
+th.text-left {
+  text-align: left;
+}
+
+th.text-center {
+  text-align: center;
+}
+
+th.text-right {
+  text-align: right;
+}
+
+td.text-left {
+  text-align: left;
+}
+
+td.text-center {
+  text-align: center;
+}
+
+td.text-right {
+  text-align: right;
+}
+
+
+
+/* TOOLTIPS (classes de placement non-utilisées à virer (actuellement que tooltip-right */
+
+
+/* Base styles for the element that has a tooltip */
+[data-tooltip],
+.tooltip {
+  position: relative;
+  cursor: pointer;
+}
+
+/* Base styles for the entire tooltip */
+[data-tooltip]:before,
+[data-tooltip]:after,
+.tooltip:before,
+.tooltip:after {
+  position: absolute;
+  visibility: hidden;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+  opacity: 0;
+  -webkit-transition: 
+      opacity 0.2s ease-in-out,
+        visibility 0.2s ease-in-out,
+        -webkit-transform 0.2s cubic-bezier(0.71, 1.7, 0.77, 1.24);
+    -moz-transition:    
+        opacity 0.2s ease-in-out,
+        visibility 0.2s ease-in-out,
+        -moz-transform 0.2s cubic-bezier(0.71, 1.7, 0.77, 1.24);
+    transition:         
+        opacity 0.2s ease-in-out,
+        visibility 0.2s ease-in-out,
+        transform 0.2s cubic-bezier(0.71, 1.7, 0.77, 1.24);
+  -webkit-transform: translate3d(0, 0, 0);
+  -moz-transform:    translate3d(0, 0, 0);
+  transform:         translate3d(0, 0, 0);
+  pointer-events: none;
+}
+
+/* Show the entire tooltip on hover and focus */
+[data-tooltip]:hover:before,
+[data-tooltip]:hover:after,
+[data-tooltip]:focus:before,
+[data-tooltip]:focus:after,
+.tooltip:hover:before,
+.tooltip:hover:after,
+.tooltip:focus:before,
+.tooltip:focus:after {
+  visibility: visible;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=100);
+  opacity: 1;
+}
+
+/* Base styles for the tooltip's directional arrow */
+.tooltip:before,
+[data-tooltip]:before {
+  z-index: 1001;
+  border: 6px solid transparent;
+  background: transparent;
+  content: "";
+}
+
+/* Base styles for the tooltip's content area */
+.tooltip:after,
+[data-tooltip]:after {
+  z-index: 1000;
+  padding: 10px;
+  width: 350px;
+  background-color: #000;
+  background-color: hsla(0, 0%, 20%, 0.9);
+  color: #fff;
+  content: attr(data-tooltip);
+  font-size: 12px;
+  font-weight: normal;
+  text-align: left;
+  line-height: 1.6;
+}
+
+/* Directions */
+
+/* Top (default) */
+[data-tooltip]:before,
+[data-tooltip]:after,
+.tooltip:before,
+.tooltip:after,
+.tooltip-top:before,
+.tooltip-top:after {
+  bottom: 100%;
+  left: 50%;
+}
+
+[data-tooltip]:before,
+.tooltip:before,
+.tooltip-top:before {
+  margin-left: -6px;
+  margin-bottom: -12px;
+  border-top-color: #000;
+  border-top-color: hsla(0, 0%, 20%, 0.9);
+}
+
+/* Horizontally align top/bottom tooltips */
+[data-tooltip]:after,
+.tooltip:after,
+.tooltip-top:after {
+  margin-left: -80px;
+}
+
+[data-tooltip]:hover:before,
+[data-tooltip]:hover:after,
+[data-tooltip]:focus:before,
+[data-tooltip]:focus:after,
+.tooltip:hover:before,
+.tooltip:hover:after,
+.tooltip:focus:before,
+.tooltip:focus:after,
+.tooltip-top:hover:before,
+.tooltip-top:hover:after,
+.tooltip-top:focus:before,
+.tooltip-top:focus:after {
+  -webkit-transform: translateY(-12px);
+  -moz-transform:    translateY(-12px);
+  transform:         translateY(-12px); 
+}
+
+/* Left */
+.tooltip-left:before,
+.tooltip-left:after {
+  right: 100%;
+  bottom: 50%;
+  left: auto;
+}
+
+.tooltip-left:before {
+  margin-left: 0;
+  margin-right: -12px;
+  margin-bottom: 0;
+  border-top-color: transparent;
+  border-left-color: #000;
+  border-left-color: hsla(0, 0%, 20%, 0.9);
+}
+
+.tooltip-left:hover:before,
+.tooltip-left:hover:after,
+.tooltip-left:focus:before,
+.tooltip-left:focus:after {
+  -webkit-transform: translateX(-12px);
+  -moz-transform:    translateX(-12px);
+  transform:         translateX(-12px); 
+}
+
+/* Bottom */
+.tooltip-bottom:before,
+.tooltip-bottom:after {
+  top: 100%;
+  bottom: auto;
+  left: 50%;
+}
+
+.tooltip-bottom:before {
+  margin-top: -12px;
+  margin-bottom: 0;
+  border-top-color: transparent;
+  border-bottom-color: #000;
+  border-bottom-color: hsla(0, 0%, 20%, 0.9);
+}
+
+.tooltip-bottom:hover:before,
+.tooltip-bottom:hover:after,
+.tooltip-bottom:focus:before,
+.tooltip-bottom:focus:after {
+  -webkit-transform: translateY(12px);
+  -moz-transform:    translateY(12px);
+  transform:         translateY(12px); 
+}
+
+/* Right */
+.tooltip-right:before,
+.tooltip-right:after {
+  bottom: 50%;
+  left: 100%;
+}
+
+.tooltip-right:before {
+  margin-bottom: 0;
+  margin-left: -12px;
+  border-top-color: transparent;
+  border-right-color: #000;
+  border-right-color: hsla(0, 0%, 20%, 0.9);
+}
+
+.tooltip-right:hover:before,
+.tooltip-right:hover:after,
+.tooltip-right:focus:before,
+.tooltip-right:focus:after {
+  -webkit-transform: translateX(12px);
+  -moz-transform:    translateX(12px);
+  transform:         translateX(12px); 
+}
+
+/* Move directional arrows down a bit for left/right tooltips */
+.tooltip-left:before,
+.tooltip-right:before {
+  top: 3px;
+}
+
+/* Vertically center tooltip content for left/right tooltips */
+.tooltip-left:after,
+.tooltip-right:after {
+  margin-left: 0;
+  margin-bottom: -16px;
+}
